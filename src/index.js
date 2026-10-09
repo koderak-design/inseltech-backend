@@ -18,5 +18,13 @@ app.use('/api/proyectos', require('./routes/proyectos'));
 app.use('/api/servicios', require('./routes/servicios'));
 app.use('/api/testimonios', require('./routes/testimonios'));
 
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../public')));
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+  }
+});
+
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => console.log(`InselTech API running on port ${PORT}`));
