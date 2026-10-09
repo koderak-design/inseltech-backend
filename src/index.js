@@ -18,7 +18,6 @@ app.use('/api/proyectos', require('./routes/proyectos'));
 app.use('/api/servicios', require('./routes/servicios'));
 app.use('/api/testimonios', require('./routes/testimonios'));
 
-const path = require('path');
 app.use(express.static(path.join(__dirname, '../public')));
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/api')) {
