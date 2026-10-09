@@ -19,10 +19,10 @@ app.use('/api/servicios', require('./routes/servicios'));
 app.use('/api/testimonios', require('./routes/testimonios'));
 
 app.use(express.static(path.join(__dirname, '../public')));
-app.get('*', (req, res) => {
+app.use((req, res, next) => {
   if (!req.path.startsWith('/api')) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
-  }
+  } else { next(); }
 });
 
 const PORT = process.env.PORT || 3002;
