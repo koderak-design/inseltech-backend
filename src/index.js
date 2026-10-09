@@ -7,7 +7,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static(process.env.UPLOADS_PATH || path.join(__dirname, '../uploads')));
+const uploadsPath = process.env.UPLOADS_PATH || path.join(__dirname, '../uploads');
+console.log('UPLOADS_PATH:', uploadsPath);
+app.use('/uploads', express.static(uploadsPath));
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 app.use('/api/analytics', require('./routes/analytics'));
